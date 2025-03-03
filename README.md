@@ -1,61 +1,62 @@
-
 # Phish㉿Buster
 
 ## Overview
-PhishBuster is a tool designed to combat phishing attacks by flooding phisher databases with false information. This script generates random email addresses and passwords and sends them to a specified URL, aiming to disrupt and dilute the accuracy of stolen data.
+PhishBuster is a tool designed to combat phishing attacks by flooding phisher databases with fake data. It generates random email addresses and passwords, sending them to a target URL to disrupt and dilute stolen data accuracy.
 
 ## Features
-- Generate random email addresses and passwords.
-- Send POST requests with fake data to specified URLs.
-- Use multi-threading to send requests concurrently.
-- Randomize User-Agent headers.
-- Option to include or exclude numbers in email addresses.
-- Support for popular email domains.
-- Logging of all requests and responses.
-- Input validation for target URLs.
-- Rate limiting to control the frequency of requests.
-- Error handling and retries for failed requests.
-- Configuration via command-line arguments.
-- Option to use proxies for requests.
-- Load configurations from JSON or YAML files.
-- Customizable email and password patterns.
-- User-defined payloads for POST requests.
-- Professional GUI for easy use, built with customtkinter.
+- Generates random email addresses and passwords with customizable patterns.
+- Sends POST requests with fake data to specified URLs.
+- Supports multi-threading for concurrent requests with clean shutdown.
+- Randomizes User-Agent headers for each request.
+- Includes optional numbers in email addresses.
+- Supports popular email domains (e.g., Gmail, Yahoo, Protonmail).
+- Logs all requests and responses to a file.
+- Validates target URLs before starting.
+- Offers rate limiting to control request frequency.
+- Handles errors gracefully with logging.
+- Configurable via command-line arguments or JSON/YAML files.
+- Uses proxies with dynamic loading from API, file, or defaults.
+- Displays real-time request stats in CLI and GUI.
+- Allows custom payloads for POST requests.
+- Features a professional GUI built with CustomTkinter.
 
 ## Installation
-1. **Set Up Environment**:
-   - Ensure you have Python 3 installed.
-   - Create a virtual environment (optional but recommended):
-     ```sh
-     python3 -m venv venv
-     source venv/bin/activate
-     ```
-   - Install the required packages:
-     ```sh
-     pip install -r requirements.txt
-     ```
+### Set Up Environment
+1. Ensure Python 3 is installed.
+2. Create a virtual environment (optional but recommended):
+   ```sh
+   python3 -m venv venv
+   source venv/bin/activate  # On Windows: venv\Scripts\activate
+   ```
+3. Install required packages:
+   ```sh
+   pip install -r requirements.txt
+   ```
 
 ## Usage
-
 ### Command Line
-To run PhishBuster from the command line:
+Run PhishBuster from the command line:
+
 ```sh
-python3 phishbuster.py <URL> [--threads NUM_THREADS] [--proxies] [--rate-limit SECONDS] [--config CONFIG_FILE] [--payload CUSTOM_PAYLOAD]
+python3 phishbuster.py <URL> [--threads NUM_THREADS] [--proxies] [--proxy-file FILE] [--rate-limit SECONDS] [--config CONFIG_FILE] [--payload CUSTOM_PAYLOAD]
 ```
-Example:
+
+**Example:**
 ```sh
 python3 phishbuster.py https://example.com --threads 50 --proxies --rate-limit 1
 ```
+Press Enter or Ctrl+C to stop.
 
 ### GUI
-To run the PhishBuster GUI:
+Launch the PhishBuster GUI:
+
 ```sh
 python3 gui.py
 ```
+Configure options via the interface and click "Start" to begin, "Stop" to halt.
 
-### Configuration File
-You can use a JSON or YAML configuration file to set parameters. Example configuration:
-
+## Configuration File
+Use a JSON or YAML file for settings. **Example:**
 ```json
 {
     "url": "https://example.com",
@@ -66,17 +67,26 @@ You can use a JSON or YAML configuration file to set parameters. Example configu
     "payload": {"email": "fake@example.com", "password": "fakepassword123"}
 }
 ```
+Load it with `--config config.json` (CLI) or the "Load Config" button (GUI).
 
-### Features
-- **URL**: The target URL to flood with fake data.
-- **Threads**: Number of concurrent threads.
-- **Proxies**: Use proxies for requests (Boolean).
-- **Rate Limit**: Rate limit in seconds between requests.
-- **Config**: Path to a configuration file.
-- **Payload**: Custom payload for POST requests.
+## Proxy Support
+- Specify proxies via `--proxy-file` or a config file.
+- If `--proxies` is used without a file, defaults load from ProxyScrape API, `proxies.txt`, or hardcoded fallbacks.
+- GUI allows adding/removing proxies dynamically in a scrollable list.
+
+## Options
+| Option       | Description |
+|-------------|-------------|
+| URL         | Target URL to flood. |
+| Threads     | Number of concurrent threads (positive integer). |
+| Proxies     | Enable proxy use (Boolean). |
+| Proxy File  | Path to a file with proxy list. |
+| Rate Limit  | Delay between requests in seconds (non-negative float). |
+| Config      | Path to a JSON/YAML configuration file. |
+| Payload     | Custom POST payload (string or file path). |
 
 ## License
-This project is licensed under the MIT License - see the LICENSE file for details ㉿r don't.
+Licensed under the MIT License - see the LICENSE file for details, or don’t.
 
 ## Disclaimer
-**Note:** This script should be used "responsibly" and only on systems you have explicit permission to test against. Misuse of this tool can lead to legal c㉿nsequences.
+**Note:** Use this tool responsibly and only on systems you have explicit permission to test. Misuse may lead to legal consequences.
